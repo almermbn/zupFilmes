@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.views.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -15,6 +15,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
+import zup.com.models.Movie;
+import zup.com.utils.MoviesDatabase;
+import zup.com.zupfilmes.R;
 
 public class MovieListAdapter extends ArrayAdapter<Movie> {
 

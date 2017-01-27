@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+
+import zup.com.fragments.FindFragment;
+import zup.com.fragments.MovieListFragment;
+import zup.com.zupfilmes.R;
 
 public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener {
 

@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.views.adapters;
 
 public interface ResettableView {
 

@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.fragments;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,6 +23,12 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import zup.com.activities.MovieDetailsActivity;
+import zup.com.models.Movie;
+import zup.com.views.adapters.MovieListAdapter;
+import zup.com.utils.MoviesDatabase;
+import zup.com.zupfilmes.R;
 
 public class MovieListFragment extends Fragment {
 
@@ -55,7 +61,7 @@ public class MovieListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getBaseContext(), MovieDetails.class);
+                Intent intent = new Intent(getActivity().getBaseContext(), MovieDetailsActivity.class);
 
                 String movieData = new Gson().toJson(movieListJson.get(position));
                 ByteArrayOutputStream bs = new ByteArrayOutputStream();

@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.utils;
 
 /**
  * Created by Almer on 08/01/2017.

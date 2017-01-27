@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

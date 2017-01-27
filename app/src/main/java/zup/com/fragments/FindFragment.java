@@ -1,6 +1,5 @@
-package zup.com.zupfilmes;
+package zup.com.fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -27,10 +26,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
+import zup.com.activities.MovieDetailsActivity;
+import zup.com.views.widgets.LoadingTask;
+import zup.com.zupfilmes.R;
 
 public class FindFragment extends Fragment {
 
-    ProgressDialog progress;
+    LoadingTask progress;
     EditText movieText;
     String searchMovie = "";
     RequestQueue queue;
@@ -43,16 +45,9 @@ public class FindFragment extends Fragment {
 
         movieText = (EditText) rootView.findViewById(R.id.etFilme);
 
-
         queue = Volley.newRequestQueue(rootView.getContext());
 
-        progress = new ProgressDialog(this.getContext());
-        progress.setTitle("");
-        progress.setMessage("Procurando...");
-        progress.setCancelable(false);
-        progress.dismiss();
-
-
+        progress = LoadingTask.setupLoading(this.getContext(), "", "Procurando...", false);
 
         Button button = (Button) rootView.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -68,37 +63,31 @@ public class FindFragment extends Fragment {
 
                     String url ="http://www.omdbapi.com/?t="+searchMovie+"&y=&plot=full&r=json";
 
-                    StringRequest strRequest = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>()
-                            {
+                    StringRequest strRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response)
                                 {
                                     try {
                                         JSONObject movieData = new JSONObject(response);
-                                        progress.dismiss();
                                         if(movieData.get("Response").equals("True")){
 
-                                            badgeCount++;
-                                            ShortcutBadger.applyCount(getContext(), badgeCount);
+                                            setNotification();
 
-                                            AHBottomNavigation bottomNavigation = (AHBottomNavigation) getActivity().findViewById(R.id.bottom_navigation);
-                                            bottomNavigation.setNotification(badgeCount, 1);
-
-                                            Intent intent = new Intent(getActivity().getBaseContext(), MovieDetails.class);
+                                            Intent intent = new Intent(getActivity().getBaseContext(), MovieDetailsActivity.class);
                                             intent.putExtra("movie", response);
                                             intent.putExtra("isEdit", false);
-                                            progress.dismiss();
+
                                             getActivity().startActivity(intent);
                                         } else {
                                             Toast.makeText(getContext(), movieData.get("Error").toString(), Toast.LENGTH_SHORT).show();
                                         }
+
                                         progress.dismiss();
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         progress.dismiss();
                                         Toast.makeText(getContext(), "Ops! Não foi possível procurar pelo seu filme :(", Toast.LENGTH_SHORT).show();
-
                                     }
                                 }
                             },
@@ -109,7 +98,6 @@ public class FindFragment extends Fragment {
                                 {
                                     progress.dismiss();
                                     Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-
                                 }
                             });
                     strRequest.setRetryPolicy(new DefaultRetryPolicy(
@@ -126,13 +114,20 @@ public class FindFragment extends Fragment {
         return rootView;
     }
 
+    private void setNotification(){
+        badgeCount++;
+        ShortcutBadger.applyCount(getContext(), badgeCount);
+
+        AHBottomNavigation bottomNavigation = (AHBottomNavigation) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigation.setNotification(badgeCount, 1);
+    }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager manager =
                 (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
         boolean isAvailable = false;
         if (networkInfo != null && networkInfo.isConnected()) {
-            // Network is present and connected
             isAvailable = true;
         }
         return isAvailable;

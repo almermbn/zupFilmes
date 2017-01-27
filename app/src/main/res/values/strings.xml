@@ -9,8 +9,15 @@
     <string name="title_activity_movie_detail">MovieDetail</string>
     <string name="title_details">Detalhes</string>
     <string name="search_your_movie">Procure seu filme</string>
-    <string name="omdb_score">IMDb Score:</string>
-    <string name="genre">Gênero:</string>
+    <string name="omdb_score">IMDb Score</string>
+    <string name="genre">Genre</string>
     <string name="shortData">Resumo</string>
+    <string name="actors">Actors</string>
     <string name="empty_list">You have no movies... Search for them !</string>
+    <string name="text_add_to_list">Adicionar</string>
+    <string name="text_language">Language</string>
+    <string name="text_writer">Writer</string>
+    <string name="text_awards">Awards</string>
+    <string name="text_director">Director</string>
+    <string name="text_title">Title</string>
 </resources>

@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,6 +13,8 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+
+import zup.com.models.Movie;
 
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

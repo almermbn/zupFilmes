@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,6 +13,8 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+
+import zup.com.models.Movie;
 
 
 public class RetrieveMovieTask extends AsyncTask<String, Void, Bitmap> {
@@ -29,10 +31,10 @@ public class RetrieveMovieTask extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected Bitmap doInBackground(String... urls) {
-        String urldisplay = urls[0];
+        String urlDisplay = urls[0];
         Bitmap mIcon11 = null;
         try {
-            InputStream in = new java.net.URL(urldisplay).openStream();
+            InputStream in = new java.net.URL(urlDisplay).openStream();
             mIcon11 = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
             e.printStackTrace();

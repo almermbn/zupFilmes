@@ -1,4 +1,4 @@
-package zup.com.zupfilmes;
+package zup.com.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 
 import com.github.jorgecastillo.FillableLoader;
 import com.github.jorgecastillo.listener.OnStateChangeListener;
+
+import zup.com.utils.Paths;
+import zup.com.zupfilmes.R;
+import zup.com.views.adapters.ResettableView;
 
 
 public class SplashFragment extends Fragment implements OnStateChangeListener, ResettableView {
