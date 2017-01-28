@@ -49,7 +49,7 @@ public class FindFragment extends Fragment {
 
         progress = LoadingTask.setupLoading(this.getContext(), "", "Procurando...", false);
 
-        Button button = (Button) rootView.findViewById(R.id.button);
+        Button button = (Button) rootView.findViewById(R.id.findButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

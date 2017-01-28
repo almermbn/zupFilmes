@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:id="@+id/writer"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        style="@style/MovieDetailsText"/>
 
     <TextView
         android:text="@string/text_director"
@@ -27,7 +28,8 @@
         android:layout_marginTop="60dp"
         android:layout_below="@+id/writer"
         android:id="@+id/director"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        style="@style/MovieDetailsText"/>
 
     <TextView
         android:text="@string/text_awards"
@@ -37,7 +39,8 @@
         android:layout_below="@+id/director"
         android:layout_marginTop="60dp"
         android:id="@+id/awards"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        style="@style/MovieDetailsText"/>
 
 
 

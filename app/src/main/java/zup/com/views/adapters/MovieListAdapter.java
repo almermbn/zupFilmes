@@ -35,6 +35,7 @@ public class MovieListAdapter extends ArrayAdapter<Movie> {
         View rowView = inflater.inflate(R.layout.movie_row, parent, false);
 
         TextView textView = (TextView) rowView.findViewById(R.id.movieTitle);
+        TextView textYear = (TextView) rowView.findViewById(R.id.year);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
         ShortcutBadger.removeCount(getContext());
@@ -42,6 +43,7 @@ public class MovieListAdapter extends ArrayAdapter<Movie> {
         Movie movie = getItem(position);
 
         textView.setText(movie.getTitle());
+        textYear.setText(movie.getYear());
 
         Bitmap image = retrieveImage(movie);
 

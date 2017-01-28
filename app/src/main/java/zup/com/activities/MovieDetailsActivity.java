@@ -19,8 +19,6 @@ import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
-import java.util.UUID;
-
 import zup.com.models.Movie;
 import zup.com.utils.DownloadImageTask;
 import zup.com.views.adapters.MovieDetailsAdapter;
@@ -76,7 +74,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         if(isEdit){
             loadImageParam(movieImage);
         } else {
-            String imageName = UUID.randomUUID().toString();
             DownloadImageTask task = new DownloadImageTask(imageHeader, movie, getApplicationContext());
             task.execute(movie.getPoster());
         }

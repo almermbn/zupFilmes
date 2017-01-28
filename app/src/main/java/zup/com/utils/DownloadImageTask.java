@@ -2,6 +2,7 @@ package zup.com.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,7 +47,6 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap result) {
         bmImage.setImageBitmap(result);
         saveLocalMovie(result);
-        Toast.makeText(context, "Movie Added to your list" , Toast.LENGTH_SHORT).show();
     }
 
     private void saveLocalMovie(Bitmap image){
@@ -56,16 +56,24 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
         String jsonMovie = new Gson().toJson(movie);
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, bos);
-        byte[] bArray = bos.toByteArray();
+        String[] params = new String[]{movie.getTitle() };
 
-        ContentValues values = new ContentValues();
-        values.put(MoviesDatabase.COLUMN_MOVIE_TITLE, movie.getTitle());
-        values.put(MoviesDatabase.COLUMN_MOVIE_DATA, jsonMovie);
-        values.put(MoviesDatabase.COLUMN_MOVIE_IMAGE, bArray);
-        db.insert(MoviesDatabase.TABLE_NAME, null, values);
+        Cursor cursor = db.rawQuery("select * from " +MoviesDatabase.TABLE_NAME + " WHERE "+MoviesDatabase.COLUMN_MOVIE_TITLE+ " = ?" , params);
+        cursor.moveToFirst();
 
+        if(cursor.getCount() ==0){
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            byte[] bArray = bos.toByteArray();
+
+            ContentValues values = new ContentValues();
+            values.put(MoviesDatabase.COLUMN_MOVIE_TITLE, movie.getTitle());
+            values.put(MoviesDatabase.COLUMN_MOVIE_DATA, jsonMovie);
+            values.put(MoviesDatabase.COLUMN_MOVIE_IMAGE, bArray);
+            db.insert(MoviesDatabase.TABLE_NAME, null, values);
+
+            Toast.makeText(context, movie.getTitle() + " added to your list" , Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
